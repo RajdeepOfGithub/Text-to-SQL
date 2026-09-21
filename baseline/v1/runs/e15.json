@@ -1,0 +1,48 @@
+{
+  "id": "e15",
+  "category": "no_answer",
+  "question": "What was total net revenue for the third quarter of 2026?",
+  "expected": {
+    "outcome": "not_available"
+  },
+  "schema_slice": {
+    "periods": [
+      {
+        "label": "Q3 2026",
+        "period_type": "duration",
+        "start": "2026-07-01",
+        "end": "2026-09-30"
+      }
+    ],
+    "candidates": []
+  },
+  "error": {
+    "type": "InstructorRetryException",
+    "message": "ge(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=[ChatCompletionMessageFunctionToolCall(id='call_avafPNZHQpiRrUaPH9P9ofGD', function=Function(arguments='{\"intent\":\"read\",\"reasoning\":\"Looking for total net revenue for Q3 2026, using the most recent period available.\",\"sql\":\"SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = \\'us-gaap:RevenuesNetOfInterestExpense\\' AND dimensions_json = \\'{}\\' AND period_start = \\'2026-07-01\\' AND period_end = \\'2026-09-30\\'\",\"target\":{\"concept\":\"us-gaap:RevenuesNetOfInterestExpense\",\"dimensions_json\":\"\"},\"target_period_start\":\"2026-07-01\",\"target_period_end\":\"2026-09-30\",\"ambiguity\":\"needs_clarification\",\"clarification_question\":\"What specific concept for net revenue are you referring to?\",\"alternatives\":[{\"concept\":\"us-gaap:RevenuesNetOfInterestExpense\",\"dimensions_json\":\"\"},{\"concept\":\"us-gaap:RevenuesNet\",\"dimensions_json\":\"\"}]}', name='SQLPlan'), type='function')]))], created=1790023877, model='gpt-4o-mini-2024-07-18', object='chat.completion', metadata=None, moderation=None, service_tier='default', system_fingerprint='fp_7fd239739d', usage=CompletionUsage(completion_tokens=477, prompt_tokens=4140, total_tokens=4617, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cache_write_tokens=None, cached_tokens=2560, image_tokens=None, text_tokens=None)))\n</completion>\n</generation>\n\n</failed_attempts>\n\n<last_exception>\n    1 validation error for SQLPlan\n  Value error, us-gaap:RevenuesNetOfInterestExpense {} is not a variant listed in SCHEMA [type=value_error, input_value={'intent': 'read', 'reaso...'dimensions_json': ''}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error\n</last_exception>",
+    "traceback": "GlalTgIxwX9tunT15y6AKcYgBA', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=[ChatCompletionMessageFunctionToolCall(id='call_MGkuC4x6GoWnRUzK2x7Pedkj', function=Function(arguments='{\"intent\":\"read\",\"reasoning\":\"Looking for total net revenue for Q3 2026, using the most recent period available.\",\"sql\":\"SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = \\'us-gaap:RevenuesNet\\' AND dimensions_json = \\'{}\\' AND period_start = \\'2026-07-01\\' AND period_end = \\'2026-09-30\\'\",\"target\":{\"concept\":\"us-gaap:RevenuesNet\",\"dimensions_json\":\"\"},\"target_period_start\":\"2026-07-01\",\"target_period_end\":\"2026-09-30\",\"ambiguity\":\"none\"}', name='SQLPlan'), type='function')]))], created=1790023875, model='gpt-4o-mini-2024-07-18', object='chat.completion', metadata=None, moderation=None, service_tier='default', system_fingerprint='fp_7fd239739d', usage=CompletionUsage(completion_tokens=278, prompt_tokens=2515, total_tokens=2793, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cache_write_tokens=None, cached_tokens=1152, image_tokens=None, text_tokens=None)))\n</completion>\n</generation>\n\n<generation number=\"3\">\n<exception>\n    1 validation error for SQLPlan\n  Value error, us-gaap:RevenuesNetOfInterestExpense {} is not a variant listed in SCHEMA [type=value_error, input_value={'intent': 'read', 'reaso...'dimensions_json': ''}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error\n</exception>\n<completion>\n    ChatCompletion(id='chatcmpl-EQfGnUaH7dVzDn5QJ7whpbelJ3SJ9', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=[ChatCompletionMessageFunctionToolCall(id='call_avafPNZHQpiRrUaPH9P9ofGD', function=Function(arguments='{\"intent\":\"read\",\"reasoning\":\"Looking for total net revenue for Q3 2026, using the most recent period available.\",\"sql\":\"SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = \\'us-gaap:RevenuesNetOfInterestExpense\\' AND dimensions_json = \\'{}\\' AND period_start = \\'2026-07-01\\' AND period_end = \\'2026-09-30\\'\",\"target\":{\"concept\":\"us-gaap:RevenuesNetOfInterestExpense\",\"dimensions_json\":\"\"},\"target_period_start\":\"2026-07-01\",\"target_period_end\":\"2026-09-30\",\"ambiguity\":\"needs_clarification\",\"clarification_question\":\"What specific concept for net revenue are you referring to?\",\"alternatives\":[{\"concept\":\"us-gaap:RevenuesNetOfInterestExpense\",\"dimensions_json\":\"\"},{\"concept\":\"us-gaap:RevenuesNet\",\"dimensions_json\":\"\"}]}', name='SQLPlan'), type='function')]))], created=1790023877, model='gpt-4o-mini-2024-07-18', object='chat.completion', metadata=None, moderation=None, service_tier='default', system_fingerprint='fp_7fd239739d', usage=CompletionUsage(completion_tokens=477, prompt_tokens=4140, total_tokens=4617, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cache_write_tokens=None, cached_tokens=2560, image_tokens=None, text_tokens=None)))\n</completion>\n</generation>\n\n</failed_attempts>\n\n<last_exception>\n    1 validation error for SQLPlan\n  Value error, us-gaap:RevenuesNetOfInterestExpense {} is not a variant listed in SCHEMA [type=value_error, input_value={'intent': 'read', 'reaso...'dimensions_json': ''}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error\n</last_exception>\n"
+  },
+  "elapsed_s": 6.58,
+  "db_before": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_after": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_unchanged": true,
+  "usage": {
+    "calls": 3,
+    "prompt_tokens": 4140,
+    "completion_tokens": 477,
+    "cost_usd": 0.00072
+  }
+}

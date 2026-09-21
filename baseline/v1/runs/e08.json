@@ -1,0 +1,250 @@
+{
+  "id": "e08",
+  "category": "ambiguous",
+  "question": "How much did the firm pay in dividends to shareholders in fiscal year 2025?",
+  "expected": {
+    "outcome": "answer",
+    "concept": "us-gaap:PaymentsOfDividends",
+    "dimensions": {},
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "value": 16625000000,
+    "unit": "iso4217:USD",
+    "disclosure_required": true,
+    "alternates": [
+      {
+        "concept": "us-gaap:DividendsCommonStockCash",
+        "dimensions": {
+          "us-gaap:StatementEquityComponentsAxis": "us-gaap:RetainedEarningsMember"
+        },
+        "value": 16060000000,
+        "meaning": "cash dividends declared on common stock only (statement of equity)"
+      }
+    ]
+  },
+  "schema_slice": {
+    "periods": [
+      {
+        "label": "FY2025",
+        "period_type": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31"
+      },
+      {
+        "label": "year-end 2025",
+        "period_type": "instant",
+        "start": null,
+        "end": "2025-12-31"
+      }
+    ],
+    "candidates": [
+      {
+        "concept": "us-gaap:PaymentsOfDividends",
+        "label": "Payments of Dividends",
+        "score": 8.18,
+        "variants_shown": 2,
+        "total_variants": 2
+      },
+      {
+        "concept": "jpm:DividendsFromSubsidiaries",
+        "label": "Dividends From Subsidiaries",
+        "score": 8.03,
+        "variants_shown": 2,
+        "total_variants": 2
+      },
+      {
+        "concept": "us-gaap:DividendsPreferredStock",
+        "label": "Dividends, Preferred Stock",
+        "score": 7.84,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:DividendsPreferredStockCash",
+        "label": "Dividends, Preferred Stock, Cash",
+        "score": 7.76,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "jpm:CashDividendsFromSubsidiariesAndAffiliates",
+        "label": "Cash Dividends from Subsidiaries and Affiliates",
+        "score": 7.72,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:DividendsCommonStockCash",
+        "label": "Dividends, Common Stock, Cash",
+        "score": 7.49,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:CommonStockDividendsPerShareDeclared",
+        "label": "Common Stock, Dividends, Per Share, Declared",
+        "score": 7.33,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:PreferredStockDividendsPerShareDeclared",
+        "label": "Preferred Stock, Dividends Per Share, Declared",
+        "score": 7.18,
+        "variants_shown": 12,
+        "total_variants": 18
+      }
+    ]
+  },
+  "answer": {
+    "question": "How much did the firm pay in dividends to shareholders in fiscal year 2025?",
+    "status": "answered",
+    "text": "$16,625M for 2025-01-01 to 2025-12-31.\nMeasure: Payments of Dividends (us-gaap:PaymentsOfDividends).\nWhy this variant: Picked the consolidated variant as it represents the total dividends paid to shareholders without any segmentation.\nOther measures in the filing that could also answer this question:\n  - Dividends, Common Stock, Cash (us-gaap:DividendsCommonStockCash; Retained Earnings [Member]): $16,060M",
+    "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:PaymentsOfDividends' AND dimensions_json = '{}' AND period_start = '2025-01-01' AND period_end = '2025-12-31'",
+    "plan": {
+      "intent": "read",
+      "reasoning": "Looking for total dividends paid to shareholders in FY2025, using the consolidated variant of the Payments of Dividends concept, which is the headline measure for total dividends paid.",
+      "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:PaymentsOfDividends' AND dimensions_json = '{}' AND period_start = '2025-01-01' AND period_end = '2025-12-31'",
+      "target": {
+        "concept": "us-gaap:PaymentsOfDividends",
+        "dimensions_json": "{}"
+      },
+      "target_period_start": "2025-01-01",
+      "target_period_end": "2025-12-31",
+      "ambiguity": "picked_headline",
+      "chosen_dimension_reason": "Picked the consolidated variant as it represents the total dividends paid to shareholders without any segmentation.",
+      "alternatives": [
+        {
+          "concept": "us-gaap:PaymentsOfDividends",
+          "dimensions_json": "{\"srt:ConsolidatedEntitiesAxis\": \"srt:ParentCompanyMember\"}"
+        }
+      ],
+      "clarification_question": null
+    },
+    "measure": {
+      "concept": "us-gaap:PaymentsOfDividends",
+      "dimensions_json": "{}",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "value_numeric": 16625000000.0,
+      "unit": "iso4217:USD",
+      "label": "Payments of Dividends",
+      "dimension_labels": {}
+    },
+    "alternatives": [
+      {
+        "concept": "us-gaap:DividendsCommonStockCash",
+        "dimensions_json": "{\"us-gaap:StatementEquityComponentsAxis\": \"us-gaap:RetainedEarningsMember\"}",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "value_numeric": 16060000000.0,
+        "unit": "iso4217:USD",
+        "label": "Dividends, Common Stock, Cash",
+        "dimension_labels": {
+          "Equity Components [Axis]": "Retained Earnings [Member]"
+        }
+      }
+    ],
+    "ambiguity": "picked_headline",
+    "rows": [
+      [
+        "us-gaap:PaymentsOfDividends",
+        "{}",
+        "2025-01-01",
+        "2025-12-31",
+        16625000000.0,
+        "iso4217:USD",
+        "JPMC_10-K_FY2025"
+      ]
+    ],
+    "columns": [
+      "concept",
+      "dimensions_json",
+      "period_start",
+      "period_end",
+      "value_numeric",
+      "unit",
+      "source_document"
+    ],
+    "block_reason": null,
+    "system_notes": [
+      "dropped breakdown listed as alternative: us-gaap:PaymentsOfDividends {\"srt:ConsolidatedEntitiesAxis\": \"srt:ParentCompanyMember\"}",
+      "system added undisclosed near-value alternative us-gaap:DividendsCommonStockCash {\"us-gaap:StatementEquityComponentsAxis\": \"us-gaap:RetainedEarningsMember\"}"
+    ]
+  },
+  "executed": true,
+  "confidence": {
+    "score": 0.4,
+    "flagged": true,
+    "reasons": [
+      "back-translation mismatch on scope: SQL answers 'What were the Payments of Dividends for JPMorgan Chase for the year ended December 31, 2025?' (The original question refers to the firm as a whole, while the back-translated question specifies JPMorgan Chase.)"
+    ],
+    "components": {
+      "back_translation": 0.0,
+      "magnitude": 1.0,
+      "unit_scale": 1.0
+    },
+    "back_translation": {
+      "original_question": "How much did the firm pay in dividends to shareholders in fiscal year 2025?",
+      "back_translated_question": "What were the Payments of Dividends for JPMorgan Chase for the year ended December 31, 2025?",
+      "judgment": {
+        "original_metric": "dividends paid",
+        "original_period": "fiscal year 2025",
+        "original_scope": "the firm",
+        "back_translated_metric": "Payments of Dividends",
+        "back_translated_period": "the year ended December 31, 2025",
+        "back_translated_scope": "JPMorgan Chase",
+        "metric": "match",
+        "period": "match",
+        "scope": "mismatch",
+        "explanation": "The original question refers to the firm as a whole, while the back-translated question specifies JPMorgan Chase."
+      },
+      "period_source": "code"
+    },
+    "sanity": {
+      "checks": [
+        {
+          "name": "non_null",
+          "status": "pass",
+          "detail": "1 row(s), value present"
+        },
+        {
+          "name": "magnitude",
+          "status": "pass",
+          "detail": "2 comparable year value(s), median 14,123,000,000"
+        },
+        {
+          "name": "unit_scale",
+          "status": "pass",
+          "detail": "answer figure 16,625,000,000 matches fact (iso4217:USD)"
+        }
+      ]
+    },
+    "notes": []
+  },
+  "error": null,
+  "elapsed_s": 7.33,
+  "db_before": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_after": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_unchanged": true,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 8429,
+    "completion_tokens": 494,
+    "cost_usd": 0.00129
+  }
+}

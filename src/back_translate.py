@@ -119,8 +119,10 @@ def _client():
     from dotenv import load_dotenv
     from openai import OpenAI
 
+    from usage import track
+
     load_dotenv(ROOT / ".env")
-    return instructor.from_openai(OpenAI(api_key=os.environ["OPENAI_API_KEY"]))
+    return track(instructor.from_openai(OpenAI(api_key=os.environ["OPENAI_API_KEY"])))
 
 
 def referenced_labels(sql: str) -> dict[str, list[str]]:

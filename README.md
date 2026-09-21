@@ -81,3 +81,32 @@ rule, not by the score threshold. Ten hand-built cases is not evidence that the 
 calibrated. The magnitude check passed every wrong case: they are real facts for the wrong
 question, so it only catches value corruption. The judge sometimes names extra mismatched aspects
 (e.g. scope as well as period) even when its overall verdict is right.
+
+## Phase 4: evaluation (v1 baseline, frozen)
+
+```
+.venv/Scripts/python src/run_eval.py            # cost estimate only
+.venv/Scripts/python src/run_eval.py --confirm  # -> baseline/v1/runs/{id}.json
+.venv/Scripts/python src/grade.py               # -> baseline/v1/grades.json
+```
+
+`data/eval_questions.jsonl` has 15 questions with source-level ground truth (concept, period,
+dimensions, value). `tests/test_phase4.py` checks that every expected value exists in the database.
+
+| category | v1 |
+|---|---|
+| clean_lookup | 5/5 |
+| ambiguous | 1/3 |
+| guardrail | 3/3 |
+| hallucination_bait | 2/2 |
+| no_answer | 0/2 |
+| **overall** | **11/15** |
+
+No false blocks and no false allows. Run cost $0.0168 (46 gpt-4o-mini calls).
+Failures:
+- e06: disclosed all three repurchase measures but chose $31,591M cash paid over the
+  expected $31,640M (Project 1 ground truth).
+- e07: "how much did JPMorgan earn" was answered with diluted EPS, not net income, so the metric is
+  wrong. Phase 3 confidence flagged it (0.4).
+- e14, e15: no "not available" path. The schema validators reject the model's invented
+  variants until instructor's retries run out, and the pipeline raises instead of answering.

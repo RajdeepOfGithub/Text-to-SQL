@@ -1,0 +1,269 @@
+{
+  "id": "e06",
+  "category": "ambiguous",
+  "question": "How much did the firm spend on share repurchases in fiscal year 2025?",
+  "expected": {
+    "outcome": "answer",
+    "concept": "us-gaap:TreasuryStockValueAcquiredCostMethod",
+    "dimensions": {
+      "us-gaap:StatementEquityComponentsAxis": "us-gaap:CommonStockMember"
+    },
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "value": 31640000000,
+    "unit": "iso4217:USD",
+    "disclosure_required": true,
+    "alternates": [
+      {
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "dimensions": {},
+        "value": 31591000000,
+        "meaning": "cash paid (cash flow statement)"
+      },
+      {
+        "concept": "us-gaap:TreasuryStockValueAcquiredCostMethod",
+        "dimensions": {
+          "us-gaap:StatementEquityComponentsAxis": "us-gaap:TreasuryStockCommonMember"
+        },
+        "value": 31924000000,
+        "meaning": "treasury stock line, statement of equity"
+      }
+    ]
+  },
+  "schema_slice": {
+    "periods": [
+      {
+        "label": "FY2025",
+        "period_type": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31"
+      },
+      {
+        "label": "year-end 2025",
+        "period_type": "instant",
+        "start": null,
+        "end": "2025-12-31"
+      }
+    ],
+    "candidates": [
+      {
+        "concept": "jpm:LoansRepurchasedOrLoansWithOptionToRepurchase",
+        "label": "Loans Repurchased Or Loans With The Option To Repurchase",
+        "score": 9.19,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "label": "Payments for Repurchase of Common Stock",
+        "score": 6.71,
+        "variants_shown": 2,
+        "total_variants": 2
+      },
+      {
+        "concept": "us-gaap:EarningsPerShareDiluted",
+        "label": "Earnings Per Share, Diluted",
+        "score": 5.94,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:EarningsPerShareBasic",
+        "label": "Earnings Per Share, Basic",
+        "score": 5.94,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:TreasuryStockSharesAcquired",
+        "label": "Treasury Stock, Shares, Acquired",
+        "score": 5.93,
+        "variants_shown": 2,
+        "total_variants": 2
+      },
+      {
+        "concept": "us-gaap:TreasuryStockValueAcquiredCostMethod",
+        "label": "Treasury Stock, Value, Acquired, Cost Method",
+        "score": 5.93,
+        "variants_shown": 2,
+        "total_variants": 2
+      },
+      {
+        "concept": "us-gaap:PreferredStockDividendsPerShareDeclared",
+        "label": "Preferred Stock, Dividends Per Share, Declared",
+        "score": 5.63,
+        "variants_shown": 12,
+        "total_variants": 18
+      },
+      {
+        "concept": "us-gaap:PreferredStockRedemptionPricePerShare",
+        "label": "Preferred Stock, Redemption Price Per Share",
+        "score": 5.58,
+        "variants_shown": 1,
+        "total_variants": 1
+      }
+    ]
+  },
+  "answer": {
+    "question": "How much did the firm spend on share repurchases in fiscal year 2025?",
+    "status": "answered",
+    "text": "$31,591M for 2025-01-01 to 2025-12-31.\nMeasure: Payments for Repurchase of Common Stock (us-gaap:PaymentsForRepurchaseOfCommonStock).\nWhy this variant: The variant with no dimensions is chosen as it represents the consolidated total.\nOther measures in the filing that could also answer this question:\n  - Treasury Stock, Value, Acquired, Cost Method (us-gaap:TreasuryStockValueAcquiredCostMethod; Common Stock [Member]): $31,640M\n  - Treasury Stock, Value, Acquired, Cost Method (us-gaap:TreasuryStockValueAcquiredCostMethod; Treasury Stock, Common [Member]): $31,924M",
+    "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:PaymentsForRepurchaseOfCommonStock' AND dimensions_json = '{}' AND period_start = '2025-01-01' AND period_end = '2025-12-31'",
+    "plan": {
+      "intent": "read",
+      "reasoning": "Looking for total payments for repurchase of common stock in FY2025, which is a duration concept. The variant with no dimensions is chosen as it represents the consolidated total.",
+      "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:PaymentsForRepurchaseOfCommonStock' AND dimensions_json = '{}' AND period_start = '2025-01-01' AND period_end = '2025-12-31'",
+      "target": {
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "dimensions_json": "{}"
+      },
+      "target_period_start": "2025-01-01",
+      "target_period_end": "2025-12-31",
+      "ambiguity": "picked_headline",
+      "chosen_dimension_reason": "The variant with no dimensions is chosen as it represents the consolidated total.",
+      "alternatives": [
+        {
+          "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+          "dimensions_json": "{\"srt:ConsolidatedEntitiesAxis\": \"srt:ParentCompanyMember\"}"
+        }
+      ],
+      "clarification_question": null
+    },
+    "measure": {
+      "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+      "dimensions_json": "{}",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "value_numeric": 31591000000.0,
+      "unit": "iso4217:USD",
+      "label": "Payments for Repurchase of Common Stock",
+      "dimension_labels": {}
+    },
+    "alternatives": [
+      {
+        "concept": "us-gaap:TreasuryStockValueAcquiredCostMethod",
+        "dimensions_json": "{\"us-gaap:StatementEquityComponentsAxis\": \"us-gaap:CommonStockMember\"}",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "value_numeric": 31640000000.0,
+        "unit": "iso4217:USD",
+        "label": "Treasury Stock, Value, Acquired, Cost Method",
+        "dimension_labels": {
+          "Equity Components [Axis]": "Common Stock [Member]"
+        }
+      },
+      {
+        "concept": "us-gaap:TreasuryStockValueAcquiredCostMethod",
+        "dimensions_json": "{\"us-gaap:StatementEquityComponentsAxis\": \"us-gaap:TreasuryStockCommonMember\"}",
+        "period_start": "2025-01-01",
+        "period_end": "2025-12-31",
+        "value_numeric": 31924000000.0,
+        "unit": "iso4217:USD",
+        "label": "Treasury Stock, Value, Acquired, Cost Method",
+        "dimension_labels": {
+          "Equity Components [Axis]": "Treasury Stock, Common [Member]"
+        }
+      }
+    ],
+    "ambiguity": "picked_headline",
+    "rows": [
+      [
+        "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "{}",
+        "2025-01-01",
+        "2025-12-31",
+        31591000000.0,
+        "iso4217:USD",
+        "JPMC_10-K_FY2025"
+      ]
+    ],
+    "columns": [
+      "concept",
+      "dimensions_json",
+      "period_start",
+      "period_end",
+      "value_numeric",
+      "unit",
+      "source_document"
+    ],
+    "block_reason": null,
+    "system_notes": [
+      "dropped breakdown listed as alternative: us-gaap:PaymentsForRepurchaseOfCommonStock {\"srt:ConsolidatedEntitiesAxis\": \"srt:ParentCompanyMember\"}",
+      "system added undisclosed near-value alternative us-gaap:TreasuryStockValueAcquiredCostMethod {\"us-gaap:StatementEquityComponentsAxis\": \"us-gaap:CommonStockMember\"}",
+      "system added undisclosed near-value alternative us-gaap:TreasuryStockValueAcquiredCostMethod {\"us-gaap:StatementEquityComponentsAxis\": \"us-gaap:TreasuryStockCommonMember\"}"
+    ]
+  },
+  "executed": true,
+  "confidence": {
+    "score": 1.0,
+    "flagged": false,
+    "reasons": [],
+    "components": {
+      "back_translation": 1.0,
+      "magnitude": 1.0,
+      "unit_scale": 1.0
+    },
+    "back_translation": {
+      "original_question": "How much did the firm spend on share repurchases in fiscal year 2025?",
+      "back_translated_question": "What were the Payments for Repurchase of Common Stock for the firm-wide consolidated total during the year ended December 31, 2025?",
+      "judgment": {
+        "original_metric": "spend on share repurchases",
+        "original_period": "fiscal year 2025",
+        "original_scope": "firm-wide consolidated total",
+        "back_translated_metric": "Payments for Repurchase of Common Stock",
+        "back_translated_period": "year ended December 31, 2025",
+        "back_translated_scope": "firm-wide consolidated total",
+        "metric": "match",
+        "period": "match",
+        "scope": "match",
+        "explanation": "All aspects match as both questions refer to the same total spend on share repurchases for the firm in the same fiscal year."
+      },
+      "period_source": "code"
+    },
+    "sanity": {
+      "checks": [
+        {
+          "name": "non_null",
+          "status": "pass",
+          "detail": "1 row(s), value present"
+        },
+        {
+          "name": "magnitude",
+          "status": "pass",
+          "detail": "2 comparable year value(s), median 14,327,000,000"
+        },
+        {
+          "name": "unit_scale",
+          "status": "pass",
+          "detail": "answer figure 31,591,000,000 matches fact (iso4217:USD)"
+        }
+      ]
+    },
+    "notes": []
+  },
+  "error": null,
+  "elapsed_s": 7.15,
+  "db_before": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_after": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_unchanged": true,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 8369,
+    "completion_tokens": 506,
+    "cost_usd": 0.00129
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "id": "e02",
+  "category": "clean_lookup",
+  "question": "What were total deposits as of June 30, 2026?",
+  "expected": {
+    "outcome": "answer",
+    "concept": "us-gaap:Deposits",
+    "dimensions": {},
+    "period_start": null,
+    "period_end": "2026-06-30",
+    "value": 2713700000000,
+    "unit": "iso4217:USD",
+    "disclosure_required": false
+  },
+  "schema_slice": {
+    "periods": [
+      {
+        "label": "as of 2026-06-30",
+        "period_type": "instant",
+        "start": null,
+        "end": "2026-06-30"
+      }
+    ],
+    "candidates": [
+      {
+        "concept": "us-gaap:Deposits",
+        "label": "Deposits",
+        "score": 19.26,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:TimeDeposits",
+        "label": "Time Deposits",
+        "score": 9.08,
+        "variants_shown": 3,
+        "total_variants": 3
+      },
+      {
+        "concept": "us-gaap:DepositsDomestic",
+        "label": "Deposits, Domestic",
+        "score": 8.92,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:DepositsForeign",
+        "label": "Deposits, Foreign",
+        "score": 8.8,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:TimeDepositsAtOrAboveFDICInsuranceLimit",
+        "label": "Time Deposits, at or Above FDIC Insurance Limit",
+        "score": 8.03,
+        "variants_shown": 3,
+        "total_variants": 3
+      },
+      {
+        "concept": "us-gaap:LiabilitiesFairValueDisclosure",
+        "label": "Liabilities, Fair Value Disclosure",
+        "score": 6.23,
+        "variants_shown": 10,
+        "total_variants": 10
+      },
+      {
+        "concept": "us-gaap:DepositsFairValueDisclosure",
+        "label": "Deposits, Fair Value Disclosure",
+        "score": 6.2,
+        "variants_shown": 9,
+        "total_variants": 9
+      },
+      {
+        "concept": "us-gaap:InterestBearingForeignDepositTimeDeposits",
+        "label": "Interest-Bearing Foreign Deposit, Time Deposits",
+        "score": 5.91,
+        "variants_shown": 1,
+        "total_variants": 1
+      }
+    ]
+  },
+  "answer": {
+    "question": "What were total deposits as of June 30, 2026?",
+    "status": "answered",
+    "text": "$2,713,700M for as of 2026-06-30.\nMeasure: Deposits (us-gaap:Deposits).\nOther measures in the filing that could also answer this question:\n  - Deposits, Fair Value Disclosure (us-gaap:DepositsFairValueDisclosure; Reported Value Measurement [Member]): $2,687,500M\n  - Deposits, Fair Value Disclosure (us-gaap:DepositsFairValueDisclosure; Estimate of Fair Value Measurement [Member]): $2,688,000M\n  - Deposits, Fair Value Disclosure (us-gaap:DepositsFairValueDisclosure; Fair Value, Inputs, Level 2 [Member], Estimate of Fair Value Measurement [Member]): $2,688,000M",
+    "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:Deposits' AND dimensions_json = '{}' AND period_start IS NULL AND period_end = '2026-06-30'",
+    "plan": {
+      "intent": "read",
+      "reasoning": "Looking for total deposits as of 2026-06-30, using the concept 'us-gaap:Deposits' which has a consolidated variant with no dimensions.",
+      "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:Deposits' AND dimensions_json = '{}' AND period_start IS NULL AND period_end = '2026-06-30'",
+      "target": {
+        "concept": "us-gaap:Deposits",
+        "dimensions_json": "{}"
+      },
+      "target_period_start": null,
+      "target_period_end": "2026-06-30",
+      "ambiguity": "none",
+      "chosen_dimension_reason": null,
+      "alternatives": [],
+      "clarification_question": null
+    },
+    "measure": {
+      "concept": "us-gaap:Deposits",
+      "dimensions_json": "{}",
+      "period_start": null,
+      "period_end": "2026-06-30",
+      "value_numeric": 2713700000000.0,
+      "unit": "iso4217:USD",
+      "label": "Deposits",
+      "dimension_labels": {}
+    },
+    "alternatives": [
+      {
+        "concept": "us-gaap:DepositsFairValueDisclosure",
+        "dimensions_json": "{\"us-gaap:FairValueByMeasurementBasisAxis\": \"us-gaap:CarryingReportedAmountFairValueDisclosureMember\"}",
+        "period_start": null,
+        "period_end": "2026-06-30",
+        "value_numeric": 2687500000000.0,
+        "unit": "iso4217:USD",
+        "label": "Deposits, Fair Value Disclosure",
+        "dimension_labels": {
+          "Measurement Basis [Axis]": "Reported Value Measurement [Member]"
+        }
+      },
+      {
+        "concept": "us-gaap:DepositsFairValueDisclosure",
+        "dimensions_json": "{\"us-gaap:FairValueByMeasurementBasisAxis\": \"us-gaap:EstimateOfFairValueFairValueDisclosureMember\"}",
+        "period_start": null,
+        "period_end": "2026-06-30",
+        "value_numeric": 2688000000000.0,
+        "unit": "iso4217:USD",
+        "label": "Deposits, Fair Value Disclosure",
+        "dimension_labels": {
+          "Measurement Basis [Axis]": "Estimate of Fair Value Measurement [Member]"
+        }
+      },
+      {
+        "concept": "us-gaap:DepositsFairValueDisclosure",
+        "dimensions_json": "{\"us-gaap:FairValueByFairValueHierarchyLevelAxis\": \"us-gaap:FairValueInputsLevel2Member\", \"us-gaap:FairValueByMeasurementBasisAxis\": \"us-gaap:EstimateOfFairValueFairValueDisclosureMember\"}",
+        "period_start": null,
+        "period_end": "2026-06-30",
+        "value_numeric": 2688000000000.0,
+        "unit": "iso4217:USD",
+        "label": "Deposits, Fair Value Disclosure",
+        "dimension_labels": {
+          "Fair Value Hierarchy and NAV [Axis]": "Fair Value, Inputs, Level 2 [Member]",
+          "Measurement Basis [Axis]": "Estimate of Fair Value Measurement [Member]"
+        }
+      }
+    ],
+    "ambiguity": "picked_headline",
+    "rows": [
+      [
+        "us-gaap:Deposits",
+        "{}",
+        null,
+        "2026-06-30",
+        2713700000000.0,
+        "iso4217:USD",
+        "JPMC_10-Q_Q2-2026"
+      ]
+    ],
+    "columns": [
+      "concept",
+      "dimensions_json",
+      "period_start",
+      "period_end",
+      "value_numeric",
+      "unit",
+      "source_document"
+    ],
+    "block_reason": null,
+    "system_notes": [
+      "system added undisclosed near-value alternative us-gaap:DepositsFairValueDisclosure {\"us-gaap:FairValueByMeasurementBasisAxis\": \"us-gaap:CarryingReportedAmountFairValueDisclosureMember\"}",
+      "system added undisclosed near-value alternative us-gaap:DepositsFairValueDisclosure {\"us-gaap:FairValueByMeasurementBasisAxis\": \"us-gaap:EstimateOfFairValueFairValueDisclosureMember\"}",
+      "system added undisclosed near-value alternative us-gaap:DepositsFairValueDisclosure {\"us-gaap:FairValueByFairValueHierarchyLevelAxis\": \"us-gaap:FairValueInputsLevel2Member\", \"us-gaap:FairValueByMeasurementBasisAxis\": \"us-gaap:EstimateOfFairValueFairValueDisclosureMember\"}"
+    ]
+  },
+  "executed": true,
+  "confidence": {
+    "score": 1.0,
+    "flagged": false,
+    "reasons": [],
+    "components": {
+      "back_translation": 1.0,
+      "magnitude": 1.0,
+      "unit_scale": 1.0
+    },
+    "back_translation": {
+      "original_question": "What were total deposits as of June 30, 2026?",
+      "back_translated_question": "What is the firm-wide consolidated total of deposits as of June 30, 2026?",
+      "judgment": {
+        "original_metric": "total deposits",
+        "original_period": "June 30, 2026",
+        "original_scope": "firm-wide consolidated total",
+        "back_translated_metric": "total of deposits",
+        "back_translated_period": "June 30, 2026",
+        "back_translated_scope": "firm-wide consolidated total",
+        "metric": "match",
+        "period": "match",
+        "scope": "match",
+        "explanation": "All aspects match exactly."
+      },
+      "period_source": "code"
+    },
+    "sanity": {
+      "checks": [
+        {
+          "name": "non_null",
+          "status": "pass",
+          "detail": "1 row(s), value present"
+        },
+        {
+          "name": "magnitude",
+          "status": "pass",
+          "detail": "2 comparable instant value(s), median 2,482,676,000,000"
+        },
+        {
+          "name": "unit_scale",
+          "status": "pass",
+          "detail": "answer figure 2,713,700,000,000 matches fact (iso4217:USD)"
+        }
+      ]
+    },
+    "notes": []
+  },
+  "error": null,
+  "elapsed_s": 4.73,
+  "db_before": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_after": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_unchanged": true,
+  "usage": {
+    "calls": 3,
+    "prompt_tokens": 5637,
+    "completion_tokens": 239,
+    "cost_usd": 0.00099
+  }
+}

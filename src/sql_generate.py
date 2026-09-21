@@ -166,8 +166,10 @@ def llm_plan(question: str, schema: SchemaSlice) -> SQLPlan:
     from dotenv import load_dotenv
     from openai import OpenAI
 
+    from usage import track
+
     load_dotenv(ROOT / ".env")
-    client = instructor.from_openai(OpenAI(api_key=os.environ["OPENAI_API_KEY"]))
+    client = track(instructor.from_openai(OpenAI(api_key=os.environ["OPENAI_API_KEY"])))
     return client.chat.completions.create(
         model=MODEL,
         temperature=0,

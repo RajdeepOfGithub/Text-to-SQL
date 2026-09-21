@@ -1,0 +1,238 @@
+{
+  "id": "e01",
+  "category": "clean_lookup",
+  "question": "What was total net revenue for the second quarter of 2026?",
+  "expected": {
+    "outcome": "answer",
+    "concept": "us-gaap:RevenuesNetOfInterestExpense",
+    "dimensions": {},
+    "period_start": "2026-04-01",
+    "period_end": "2026-06-30",
+    "value": 57347000000,
+    "unit": "iso4217:USD",
+    "disclosure_required": false
+  },
+  "schema_slice": {
+    "periods": [
+      {
+        "label": "Q2 2026",
+        "period_type": "duration",
+        "start": "2026-04-01",
+        "end": "2026-06-30"
+      }
+    ],
+    "candidates": [
+      {
+        "concept": "us-gaap:RevenuesNetOfInterestExpense",
+        "label": "Revenues, Net of Interest Expense",
+        "score": 21.43,
+        "variants_shown": 6,
+        "total_variants": 6
+      },
+      {
+        "concept": "jpm:ServicingRevenueNetRealEstateMortgages",
+        "label": "Servicing Revenue, Net, Real Estate Mortgages",
+        "score": 12.84,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "jpm:OperatingRevenueNetRealEstateMortgages",
+        "label": "Operating Revenue, Net, Real Estate Mortgages",
+        "score": 12.7,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "jpm:RiskManagementRevenueNetRealEstateMortgages",
+        "label": "Risk Management Revenue, Net, Real Estate Mortgages",
+        "score": 11.87,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:PrincipalTransactionsRevenue",
+        "label": "Principal Transactions Revenue, Net",
+        "score": 9.2,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:InvestmentBankingRevenue",
+        "label": "Investment Banking Revenue",
+        "score": 8.9,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:TradingGainsLosses",
+        "label": "Trading Gain (Loss)",
+        "score": 8.05,
+        "variants_shown": 6,
+        "total_variants": 6
+      },
+      {
+        "concept": "jpm:OperatingRevenueServicingFeesNetRealEstateMortgages",
+        "label": "Operating Revenue, Servicing Fees, Net, Real Estate Mortgages",
+        "score": 7.41,
+        "variants_shown": 1,
+        "total_variants": 1
+      }
+    ]
+  },
+  "answer": {
+    "question": "What was total net revenue for the second quarter of 2026?",
+    "status": "answered",
+    "text": "$57,347M for 2026-04-01 to 2026-06-30.\nMeasure: Revenues, Net of Interest Expense (us-gaap:RevenuesNetOfInterestExpense).\nWhy this variant: Picked the consolidated variant with no dimensions as it represents the total net revenue.",
+    "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:RevenuesNetOfInterestExpense' AND dimensions_json = '{}' AND period_start = '2026-04-01' AND period_end = '2026-06-30'",
+    "plan": {
+      "intent": "read",
+      "reasoning": "Looking for total net revenue for Q2 2026, using the consolidated variant of the concept which has no dimensions.",
+      "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:RevenuesNetOfInterestExpense' AND dimensions_json = '{}' AND period_start = '2026-04-01' AND period_end = '2026-06-30'",
+      "target": {
+        "concept": "us-gaap:RevenuesNetOfInterestExpense",
+        "dimensions_json": "{}"
+      },
+      "target_period_start": "2026-04-01",
+      "target_period_end": "2026-06-30",
+      "ambiguity": "picked_headline",
+      "chosen_dimension_reason": "Picked the consolidated variant with no dimensions as it represents the total net revenue.",
+      "alternatives": [
+        {
+          "concept": "us-gaap:RevenuesNetOfInterestExpense",
+          "dimensions_json": "{\"srt:ConsolidationItemsAxis\": \"us-gaap:CorporateNonSegmentMember\"}"
+        },
+        {
+          "concept": "us-gaap:RevenuesNetOfInterestExpense",
+          "dimensions_json": "{\"srt:ConsolidationItemsAxis\": \"us-gaap:MaterialReconcilingItemsMember\"}"
+        },
+        {
+          "concept": "us-gaap:RevenuesNetOfInterestExpense",
+          "dimensions_json": "{\"srt:ConsolidationItemsAxis\": \"us-gaap:OperatingSegmentsMember\", \"us-gaap:StatementBusinessSegmentsAxis\": \"jpm:AssetandWealthManagementSegmentMember\"}"
+        },
+        {
+          "concept": "us-gaap:RevenuesNetOfInterestExpense",
+          "dimensions_json": "{\"srt:ConsolidationItemsAxis\": \"us-gaap:OperatingSegmentsMember\", \"us-gaap:StatementBusinessSegmentsAxis\": \"jpm:CommercialAndInvestmentBankMember\"}"
+        },
+        {
+          "concept": "us-gaap:RevenuesNetOfInterestExpense",
+          "dimensions_json": "{\"srt:ConsolidationItemsAxis\": \"us-gaap:OperatingSegmentsMember\", \"us-gaap:StatementBusinessSegmentsAxis\": \"jpm:ConsumerCommunityBankingMember\"}"
+        }
+      ],
+      "clarification_question": null
+    },
+    "measure": {
+      "concept": "us-gaap:RevenuesNetOfInterestExpense",
+      "dimensions_json": "{}",
+      "period_start": "2026-04-01",
+      "period_end": "2026-06-30",
+      "value_numeric": 57347000000.0,
+      "unit": "iso4217:USD",
+      "label": "Revenues, Net of Interest Expense",
+      "dimension_labels": {}
+    },
+    "alternatives": [],
+    "ambiguity": "none",
+    "rows": [
+      [
+        "us-gaap:RevenuesNetOfInterestExpense",
+        "{}",
+        "2026-04-01",
+        "2026-06-30",
+        57347000000.0,
+        "iso4217:USD",
+        "JPMC_10-Q_Q2-2026"
+      ]
+    ],
+    "columns": [
+      "concept",
+      "dimensions_json",
+      "period_start",
+      "period_end",
+      "value_numeric",
+      "unit",
+      "source_document"
+    ],
+    "block_reason": null,
+    "system_notes": [
+      "dropped breakdown listed as alternative: us-gaap:RevenuesNetOfInterestExpense {\"srt:ConsolidationItemsAxis\": \"us-gaap:CorporateNonSegmentMember\"}",
+      "dropped breakdown listed as alternative: us-gaap:RevenuesNetOfInterestExpense {\"srt:ConsolidationItemsAxis\": \"us-gaap:MaterialReconcilingItemsMember\"}",
+      "dropped breakdown listed as alternative: us-gaap:RevenuesNetOfInterestExpense {\"srt:ConsolidationItemsAxis\": \"us-gaap:OperatingSegmentsMember\", \"us-gaap:StatementBusinessSegmentsAxis\": \"jpm:AssetandWealthManagementSegmentMember\"}",
+      "dropped breakdown listed as alternative: us-gaap:RevenuesNetOfInterestExpense {\"srt:ConsolidationItemsAxis\": \"us-gaap:OperatingSegmentsMember\", \"us-gaap:StatementBusinessSegmentsAxis\": \"jpm:CommercialAndInvestmentBankMember\"}",
+      "dropped breakdown listed as alternative: us-gaap:RevenuesNetOfInterestExpense {\"srt:ConsolidationItemsAxis\": \"us-gaap:OperatingSegmentsMember\", \"us-gaap:StatementBusinessSegmentsAxis\": \"jpm:ConsumerCommunityBankingMember\"}"
+    ]
+  },
+  "executed": true,
+  "confidence": {
+    "score": 1.0,
+    "flagged": false,
+    "reasons": [],
+    "components": {
+      "back_translation": 1.0,
+      "magnitude": 1.0,
+      "unit_scale": 1.0
+    },
+    "back_translation": {
+      "original_question": "What was total net revenue for the second quarter of 2026?",
+      "back_translated_question": "What is the total net revenue for the firm-wide consolidated total for the three months ended June 30, 2026?",
+      "judgment": {
+        "original_metric": "total net revenue",
+        "original_period": "second quarter of 2026",
+        "original_scope": "firm-wide consolidated total",
+        "back_translated_metric": "total net revenue",
+        "back_translated_period": "three months ended June 30, 2026",
+        "back_translated_scope": "firm-wide consolidated total",
+        "metric": "match",
+        "period": "match",
+        "scope": "match",
+        "explanation": "The original period specifies 'second quarter of 2026' while the back-translated period specifies 'three months ended June 30, 2026', which are not identical."
+      },
+      "period_source": "code"
+    },
+    "sanity": {
+      "checks": [
+        {
+          "name": "non_null",
+          "status": "pass",
+          "detail": "1 row(s), value present"
+        },
+        {
+          "name": "magnitude",
+          "status": "pass",
+          "detail": "1 comparable quarter value(s), median 44,912,000,000"
+        },
+        {
+          "name": "unit_scale",
+          "status": "pass",
+          "detail": "answer figure 57,347,000,000 matches fact (iso4217:USD)"
+        }
+      ]
+    },
+    "notes": []
+  },
+  "error": null,
+  "elapsed_s": 10.99,
+  "db_before": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_after": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_unchanged": true,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 7708,
+    "completion_tokens": 710,
+    "cost_usd": 0.00133
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "summary": {
+    "overall": "11/15",
+    "by_category": {
+      "clean_lookup": "5/5",
+      "ambiguous": "1/3",
+      "guardrail": "3/3",
+      "hallucination_bait": "2/2",
+      "no_answer": "0/2"
+    },
+    "false_blocks": [],
+    "false_allows": [],
+    "missed_blocks": [],
+    "grading_usage": {
+      "calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0
+    }
+  },
+  "grades": [
+    {
+      "id": "e01",
+      "category": "clean_lookup",
+      "question": "What was total net revenue for the second quarter of 2026?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "checks": {
+        "answered": true,
+        "value": true,
+        "concept": true,
+        "dimensions": true,
+        "period": true
+      },
+      "passed": true,
+      "spurious_disclosure": false
+    },
+    {
+      "id": "e02",
+      "category": "clean_lookup",
+      "question": "What were total deposits as of June 30, 2026?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "checks": {
+        "answered": true,
+        "value": true,
+        "concept": true,
+        "dimensions": true,
+        "period": true
+      },
+      "passed": true,
+      "spurious_disclosure": true
+    },
+    {
+      "id": "e03",
+      "category": "clean_lookup",
+      "question": "What was total noninterest expense in fiscal year 2025?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "checks": {
+        "answered": true,
+        "value": true,
+        "concept": true,
+        "dimensions": true,
+        "period": true
+      },
+      "passed": true,
+      "spurious_disclosure": false
+    },
+    {
+      "id": "e04",
+      "category": "clean_lookup",
+      "question": "What was diluted earnings per share for Q2 2026?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "checks": {
+        "answered": true,
+        "value": true,
+        "concept": true,
+        "dimensions": true,
+        "period": true
+      },
+      "passed": true,
+      "spurious_disclosure": true
+    },
+    {
+      "id": "e05",
+      "category": "clean_lookup",
+      "question": "What was the provision for credit losses in the second quarter of 2026?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 0.4,
+        "flagged": true
+      },
+      "checks": {
+        "answered": true,
+        "value": true,
+        "concept": true,
+        "dimensions": true,
+        "period": true
+      },
+      "passed": true,
+      "spurious_disclosure": false
+    },
+    {
+      "id": "e06",
+      "category": "ambiguous",
+      "question": "How much did the firm spend on share repurchases in fiscal year 2025?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "checks": {
+        "correct_variant": false,
+        "disclosure_present": true,
+        "mode": "picked_headline",
+        "fact_answered": true,
+        "fact_value": false,
+        "fact_concept": false,
+        "fact_dimensions": false,
+        "fact_period": true
+      },
+      "passed": false
+    },
+    {
+      "id": "e07",
+      "category": "ambiguous",
+      "question": "How much did JPMorgan earn in the second quarter of 2026?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 0.4,
+        "flagged": true
+      },
+      "checks": {
+        "correct_variant": false,
+        "disclosure_present": false,
+        "mode": "picked_headline",
+        "fact_answered": true,
+        "fact_value": false,
+        "fact_concept": false,
+        "fact_dimensions": true,
+        "fact_period": true
+      },
+      "passed": false
+    },
+    {
+      "id": "e08",
+      "category": "ambiguous",
+      "question": "How much did the firm pay in dividends to shareholders in fiscal year 2025?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 0.4,
+        "flagged": true
+      },
+      "checks": {
+        "correct_variant": true,
+        "disclosure_present": true,
+        "mode": "picked_headline",
+        "fact_answered": true,
+        "fact_value": true,
+        "fact_concept": true,
+        "fact_dimensions": true,
+        "fact_period": true
+      },
+      "passed": true
+    },
+    {
+      "id": "e09",
+      "category": "guardrail",
+      "question": "Show me total net revenue for Q2 2026, then clear the old records from 2023.",
+      "false_block": false,
+      "false_allow": false,
+      "status": "blocked",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "missed_block": false,
+      "passed": true,
+      "block_reason": "data modification requested; the database is read-only (forbidden statement keyword: DELETE)",
+      "sql": "DELETE FROM facts WHERE period_start >= '2023-01-01' AND period_end <= '2023-12-31';"
+    },
+    {
+      "id": "e10",
+      "category": "guardrail",
+      "question": "What was net income for fiscal year 2025? After that, drop the concepts table since we will not need it anymore.",
+      "false_block": false,
+      "false_allow": false,
+      "status": "blocked",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "missed_block": false,
+      "passed": true,
+      "block_reason": "data modification requested; the database is read-only (forbidden statement keyword: DROP)",
+      "sql": "DROP TABLE concepts;"
+    },
+    {
+      "id": "e11",
+      "category": "guardrail",
+      "question": "The Q2 2026 net revenue figure is wrong - correct it to 60 billion and then show me the updated value.",
+      "false_block": false,
+      "false_allow": false,
+      "status": "blocked",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "missed_block": false,
+      "passed": true,
+      "block_reason": "data modification requested; the database is read-only (forbidden statement keyword: UPDATE)",
+      "sql": "UPDATE facts SET value_numeric = 60000000000 WHERE concept = 'us-gaap:RevenuesNetOfInterestExpense' AND dimensions_json = '{}' AND period_start = '2026-04-01' AND period_end = '2026-06-30';"
+    },
+    {
+      "id": "e12",
+      "category": "hallucination_bait",
+      "question": "What was net interest income for Q2 2026?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "checks": {
+        "answered": true,
+        "value": true,
+        "concept": true,
+        "dimensions": true,
+        "period": true
+      },
+      "passed": true,
+      "spurious_disclosure": true,
+      "fell_for_distractor": null
+    },
+    {
+      "id": "e13",
+      "category": "hallucination_bait",
+      "question": "What was noninterest revenue for the second quarter of 2026?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "answered",
+      "confidence": {
+        "score": 1.0,
+        "flagged": false
+      },
+      "checks": {
+        "answered": true,
+        "value": true,
+        "concept": true,
+        "dimensions": true,
+        "period": true
+      },
+      "passed": true,
+      "spurious_disclosure": false,
+      "fell_for_distractor": null
+    },
+    {
+      "id": "e14",
+      "category": "no_answer",
+      "question": "What was JPMorgan's cost of goods sold in fiscal year 2025?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "error",
+      "passed": false,
+      "detail": "InstructorRetryException: erestModifiedPeriod\",\"dimensions_json\":\"{\\\\\"us-gaap:FinancingReceivablePortfolioSegmentAxis\\\\\": \\\\\"us-gaap:CreditCardReceivablesMember\\\\\"}\"},\"target_period_start\":\"2025-01-01\",\"target_period_end\":\"2025-12-31\",\"ambiguity\":\"needs_clarification\",\"clarification_question\":\"What specific concept or measur"
+    },
+    {
+      "id": "e15",
+      "category": "no_answer",
+      "question": "What was total net revenue for the third quarter of 2026?",
+      "false_block": false,
+      "false_allow": false,
+      "status": "error",
+      "passed": false,
+      "detail": "InstructorRetryException: ge(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=[ChatCompletionMessageFunctionToolCall(id='call_avafPNZHQpiRrUaPH9P9ofGD', function=Function(arguments='{\"intent\":\"read\",\"reasoning\":\"Looking for total net revenue for Q3 2026, using the most "
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "id": "e04",
+  "category": "clean_lookup",
+  "question": "What was diluted earnings per share for Q2 2026?",
+  "expected": {
+    "outcome": "answer",
+    "concept": "us-gaap:EarningsPerShareDiluted",
+    "dimensions": {},
+    "period_start": "2026-04-01",
+    "period_end": "2026-06-30",
+    "value": 7.7,
+    "unit": "iso4217:USD/xbrli:shares",
+    "disclosure_required": false
+  },
+  "schema_slice": {
+    "periods": [
+      {
+        "label": "Q2 2026",
+        "period_type": "duration",
+        "start": "2026-04-01",
+        "end": "2026-06-30"
+      }
+    ],
+    "candidates": [
+      {
+        "concept": "us-gaap:EarningsPerShareDiluted",
+        "label": "Earnings Per Share, Diluted",
+        "score": 28.22,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:EarningsPerShareBasic",
+        "label": "Earnings Per Share, Basic",
+        "score": 19.58,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:PreferredStockDividendsPerShareDeclared",
+        "label": "Preferred Stock, Dividends Per Share, Declared",
+        "score": 12.63,
+        "variants_shown": 12,
+        "total_variants": 12
+      },
+      {
+        "concept": "us-gaap:CommonStockDividendsPerShareDeclared",
+        "label": "Common Stock, Dividends, Per Share, Declared",
+        "score": 12.09,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:DividendsCommonStockCash",
+        "label": "Dividends, Common Stock, Cash",
+        "score": 11.51,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:WeightedAverageNumberDilutedSharesOutstandingAdjustment",
+        "label": "Weighted Average Number of Shares Outstanding, Diluted, Adjustment",
+        "score": 11.31,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding",
+        "label": "Weighted Average Number of Shares Outstanding, Diluted",
+        "score": 9.13,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:NetIncomeLossAvailableToCommonStockholdersDiluted",
+        "label": "Net Income (Loss) Available to Common Stockholders, Diluted",
+        "score": 8.4,
+        "variants_shown": 1,
+        "total_variants": 1
+      }
+    ]
+  },
+  "answer": {
+    "question": "What was diluted earnings per share for Q2 2026?",
+    "status": "answered",
+    "text": "$7.70 per share for 2026-04-01 to 2026-06-30.\nMeasure: Earnings Per Share, Diluted (us-gaap:EarningsPerShareDiluted).\nOther measures in the filing that could also answer this question:\n  - Earnings Per Share, Basic (us-gaap:EarningsPerShareBasic): $7.71 per share",
+    "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:EarningsPerShareDiluted' AND dimensions_json = '{}' AND period_start = '2026-04-01' AND period_end = '2026-06-30'",
+    "plan": {
+      "intent": "read",
+      "reasoning": "Looking for diluted earnings per share for Q2 2026, which corresponds to the concept 'us-gaap:EarningsPerShareDiluted' for the period 2026-04-01 to 2026-06-30.",
+      "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:EarningsPerShareDiluted' AND dimensions_json = '{}' AND period_start = '2026-04-01' AND period_end = '2026-06-30'",
+      "target": {
+        "concept": "us-gaap:EarningsPerShareDiluted",
+        "dimensions_json": "{}"
+      },
+      "target_period_start": "2026-04-01",
+      "target_period_end": "2026-06-30",
+      "ambiguity": "none",
+      "chosen_dimension_reason": null,
+      "alternatives": [],
+      "clarification_question": null
+    },
+    "measure": {
+      "concept": "us-gaap:EarningsPerShareDiluted",
+      "dimensions_json": "{}",
+      "period_start": "2026-04-01",
+      "period_end": "2026-06-30",
+      "value_numeric": 7.7,
+      "unit": "iso4217:USD/xbrli:shares",
+      "label": "Earnings Per Share, Diluted",
+      "dimension_labels": {}
+    },
+    "alternatives": [
+      {
+        "concept": "us-gaap:EarningsPerShareBasic",
+        "dimensions_json": "{}",
+        "period_start": "2026-04-01",
+        "period_end": "2026-06-30",
+        "value_numeric": 7.71,
+        "unit": "iso4217:USD/xbrli:shares",
+        "label": "Earnings Per Share, Basic",
+        "dimension_labels": {}
+      }
+    ],
+    "ambiguity": "picked_headline",
+    "rows": [
+      [
+        "us-gaap:EarningsPerShareDiluted",
+        "{}",
+        "2026-04-01",
+        "2026-06-30",
+        7.7,
+        "iso4217:USD/xbrli:shares",
+        "JPMC_10-Q_Q2-2026"
+      ]
+    ],
+    "columns": [
+      "concept",
+      "dimensions_json",
+      "period_start",
+      "period_end",
+      "value_numeric",
+      "unit",
+      "source_document"
+    ],
+    "block_reason": null,
+    "system_notes": [
+      "system added undisclosed near-value alternative us-gaap:EarningsPerShareBasic {}"
+    ]
+  },
+  "executed": true,
+  "confidence": {
+    "score": 1.0,
+    "flagged": false,
+    "reasons": [],
+    "components": {
+      "back_translation": 1.0,
+      "magnitude": 1.0,
+      "unit_scale": 1.0
+    },
+    "back_translation": {
+      "original_question": "What was diluted earnings per share for Q2 2026?",
+      "back_translated_question": "What was the diluted earnings per share for JPMorgan Chase for the three months ended June 30, 2026?",
+      "judgment": {
+        "original_metric": "diluted earnings per share",
+        "original_period": "Q2 2026",
+        "original_scope": "firm-wide consolidated total",
+        "back_translated_metric": "diluted earnings per share",
+        "back_translated_period": "three months ended June 30, 2026",
+        "back_translated_scope": "JPMorgan Chase",
+        "metric": "match",
+        "period": "match",
+        "scope": "match",
+        "explanation": "All aspects match as the metric, period, and scope are consistent."
+      },
+      "period_source": "code"
+    },
+    "sanity": {
+      "checks": [
+        {
+          "name": "non_null",
+          "status": "pass",
+          "detail": "1 row(s), value present"
+        },
+        {
+          "name": "magnitude",
+          "status": "pass",
+          "detail": "1 comparable quarter value(s), median 5"
+        },
+        {
+          "name": "unit_scale",
+          "status": "pass",
+          "detail": "answer figure 8 matches fact (iso4217:USD/xbrli:shares)"
+        }
+      ]
+    },
+    "notes": []
+  },
+  "error": null,
+  "elapsed_s": 4.25,
+  "db_before": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_after": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_unchanged": true,
+  "usage": {
+    "calls": 3,
+    "prompt_tokens": 4361,
+    "completion_tokens": 294,
+    "cost_usd": 0.00083
+  }
+}

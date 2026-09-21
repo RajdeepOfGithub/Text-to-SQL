@@ -1,0 +1,111 @@
+{
+  "id": "e14",
+  "category": "no_answer",
+  "question": "What was JPMorgan's cost of goods sold in fiscal year 2025?",
+  "expected": {
+    "outcome": "not_available"
+  },
+  "schema_slice": {
+    "periods": [
+      {
+        "label": "FY2025",
+        "period_type": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31"
+      },
+      {
+        "label": "year-end 2025",
+        "period_type": "instant",
+        "start": null,
+        "end": "2025-12-31"
+      }
+    ],
+    "candidates": [
+      {
+        "concept": "us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod",
+        "label": "Financing Receivable, Excluding Accrued Interest, Modified in Period, Amount",
+        "score": 7.35,
+        "variants_shown": 12,
+        "total_variants": 22
+      },
+      {
+        "concept": "jpm:AccruedInterestAndAccountsReceivable",
+        "label": "Accrued Interest and Accounts Receivable",
+        "score": 6.16,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:SecuritiesSoldUnderAgreementsToRepurchase",
+        "label": "Securities Sold under Agreements to Repurchase",
+        "score": 5.72,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "jpm:IndemnificationAgreementsLoanSaleAndSecuritizationLoansSoldWithRecourseCarryingValue",
+        "label": "Indemnification Agreements, Loan Sale and Securitization, Loans Sold with Recourse: Carrying Value",
+        "score": 5.57,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:FederalFundsSoldAndSecuritiesPurchasedUnderAgreementsToResell",
+        "label": "Federal Funds Sold and Securities Purchased under Agreements to Resell",
+        "score": 5.55,
+        "variants_shown": 6,
+        "total_variants": 6
+      },
+      {
+        "concept": "jpm:IndemnificationAgreementsLoanSaleAndSecuritizationLoansSoldWithRecourseContractualAmount",
+        "label": "Indemnification Agreements Loan Sale And Securitization Loans Sold With Recourse Contractual Amount",
+        "score": 5.53,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:SecuritiesSoldUnderAgreementsToRepurchaseFairValueOfCollateral",
+        "label": "Securities Sold under Agreements to Repurchase, Fair Value of Collateral",
+        "score": 5.46,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:SecuritiesSoldUnderAgreementsToRepurchaseGrossIncludingNotSubjectToMasterNettingArrangement",
+        "label": "Securities Sold under Agreements to Repurchase, Gross Including Not Subject to Master Netting Arrangement",
+        "score": 5.46,
+        "variants_shown": 12,
+        "total_variants": 14
+      }
+    ]
+  },
+  "error": {
+    "type": "InstructorRetryException",
+    "message": "erestModifiedPeriod\",\"dimensions_json\":\"{\\\\\"us-gaap:FinancingReceivablePortfolioSegmentAxis\\\\\": \\\\\"us-gaap:CreditCardReceivablesMember\\\\\"}\"},\"target_period_start\":\"2025-01-01\",\"target_period_end\":\"2025-12-31\",\"ambiguity\":\"needs_clarification\",\"clarification_question\":\"What specific concept or measure should be used to represent the cost of goods sold, as it is not listed in the provided schema?\",\"alternatives\":[{\"concept\":\"us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod\",\"dimensions_json\":\"{\\\\\"us-gaap:FinancingReceivablePortfolioSegmentAxis\\\\\": \\\\\"us-gaap:CreditCardReceivablesMember\\\\\"}\"},{\"concept\":\"us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod\",\"dimensions_json\":\"{\\\\\"us-gaap:EquitySecuritiesByIndustryAxis\\\\\": \\\\\"us-gaap:CommercialAndIndustrialSectorMember\\\\\", \\\\\"us-gaap:FinancingReceivablePortfolioSegmentAxis\\\\\": \\\\\"us-gaap:CommercialPortfolioSegmentMember\\\\\"}\"}]}', name='SQLPlan'), type='function')]))], created=1790023869, model='gpt-4o-mini-2024-07-18', object='chat.completion', metadata=None, moderation=None, service_tier='default', system_fingerprint='fp_7fd239739d', usage=CompletionUsage(completion_tokens=994, prompt_tokens=18200, total_tokens=19194, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cache_write_tokens=None, cached_tokens=12160, image_tokens=None, text_tokens=None)))\n</completion>\n</generation>\n\n</failed_attempts>\n\n<last_exception>\n    1 validation error for SQLPlan\n  Value error, us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod has 22 dimensional variants in scope; chosen_dimension_reason must say which was picked and why [type=value_error, input_value={'intent': 'read', 'reaso...folioSegmentMember\"}'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error\n</last_exception>",
+    "traceback": "int='fp_7fd239739d', usage=CompletionUsage(completion_tokens=595, prompt_tokens=11724, total_tokens=12319, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cache_write_tokens=None, cached_tokens=5888, image_tokens=None, text_tokens=None)))\n</completion>\n</generation>\n\n<generation number=\"3\">\n<exception>\n    1 validation error for SQLPlan\n  Value error, us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod has 22 dimensional variants in scope; chosen_dimension_reason must say which was picked and why [type=value_error, input_value={'intent': 'read', 'reaso...folioSegmentMember\"}'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error\n</exception>\n<completion>\n    ChatCompletion(id='chatcmpl-EQfGfOSTzfW0XmyMDUs1SDExvK2BN', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content=None, refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=[ChatCompletionMessageFunctionToolCall(id='call_OyD24IUqVMsTWsBlWGBdizCp', function=Function(arguments='{\"intent\":\"read\",\"reasoning\":\"The question asks for the cost of goods sold for fiscal year 2025, which is typically represented by the concept \\'us-gaap:CostOfGoodsSold\\'. However, this concept is not listed in the provided schema. Therefore, I will select the most relevant concept available, which is \\'us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod\\' for the fiscal year 2025.\",\"sql\":\"SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = \\'us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod\\' AND period_start = \\'2025-01-01\\' AND period_end = \\'2025-12-31\\'\",\"target\":{\"concept\":\"us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod\",\"dimensions_json\":\"{\\\\\"us-gaap:FinancingReceivablePortfolioSegmentAxis\\\\\": \\\\\"us-gaap:CreditCardReceivablesMember\\\\\"}\"},\"target_period_start\":\"2025-01-01\",\"target_period_end\":\"2025-12-31\",\"ambiguity\":\"needs_clarification\",\"clarification_question\":\"What specific concept or measure should be used to represent the cost of goods sold, as it is not listed in the provided schema?\",\"alternatives\":[{\"concept\":\"us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod\",\"dimensions_json\":\"{\\\\\"us-gaap:FinancingReceivablePortfolioSegmentAxis\\\\\": \\\\\"us-gaap:CreditCardReceivablesMember\\\\\"}\"},{\"concept\":\"us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod\",\"dimensions_json\":\"{\\\\\"us-gaap:EquitySecuritiesByIndustryAxis\\\\\": \\\\\"us-gaap:CommercialAndIndustrialSectorMember\\\\\", \\\\\"us-gaap:FinancingReceivablePortfolioSegmentAxis\\\\\": \\\\\"us-gaap:CommercialPortfolioSegmentMember\\\\\"}\"}]}', name='SQLPlan'), type='function')]))], created=1790023869, model='gpt-4o-mini-2024-07-18', object='chat.completion', metadata=None, moderation=None, service_tier='default', system_fingerprint='fp_7fd239739d', usage=CompletionUsage(completion_tokens=994, prompt_tokens=18200, total_tokens=19194, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cache_write_tokens=None, cached_tokens=12160, image_tokens=None, text_tokens=None)))\n</completion>\n</generation>\n\n</failed_attempts>\n\n<last_exception>\n    1 validation error for SQLPlan\n  Value error, us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod has 22 dimensional variants in scope; chosen_dimension_reason must say which was picked and why [type=value_error, input_value={'intent': 'read', 'reaso...folioSegmentMember\"}'}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error\n</last_exception>\n"
+  },
+  "elapsed_s": 10.29,
+  "db_before": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_after": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_unchanged": true,
+  "usage": {
+    "calls": 3,
+    "prompt_tokens": 18200,
+    "completion_tokens": 994,
+    "cost_usd": 0.00241
+  }
+}
