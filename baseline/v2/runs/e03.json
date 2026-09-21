@@ -1,0 +1,219 @@
+{
+  "id": "e03",
+  "category": "clean_lookup",
+  "question": "What was total noninterest expense in fiscal year 2025?",
+  "expected": {
+    "outcome": "answer",
+    "concept": "us-gaap:NoninterestExpense",
+    "dimensions": {},
+    "period_start": "2025-01-01",
+    "period_end": "2025-12-31",
+    "value": 95640000000,
+    "unit": "iso4217:USD",
+    "disclosure_required": false
+  },
+  "schema_slice": {
+    "periods": [
+      {
+        "label": "FY2025",
+        "period_type": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31"
+      },
+      {
+        "label": "year-end 2025",
+        "period_type": "instant",
+        "start": null,
+        "end": "2025-12-31"
+      }
+    ],
+    "candidates": [
+      {
+        "concept": "us-gaap:NoninterestExpense",
+        "label": "Noninterest Expense",
+        "score": 25.93,
+        "variants_shown": 6,
+        "total_variants": 6
+      },
+      {
+        "concept": "us-gaap:OtherNoninterestExpense",
+        "label": "Other Noninterest Expense",
+        "score": 22.63,
+        "variants_shown": 2,
+        "total_variants": 2
+      },
+      {
+        "concept": "jpm:CombinedAggregateInterestandNoninterestExpense",
+        "label": "Combined Aggregate Interest and Noninterest Expense",
+        "score": 13.86,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "jpm:NoninterestExpenseExcludingLaborAndRelatedExpense",
+        "label": "Noninterest Expense, Excluding Labor And Related Expense",
+        "score": 11.63,
+        "variants_shown": 3,
+        "total_variants": 3
+      },
+      {
+        "concept": "jpm:NoninterestExpenseAndProvisionForLoanLeaseAndOtherLosses",
+        "label": "Noninterest Expense And Provision For Loan Lease And Other Losses",
+        "score": 11.5,
+        "variants_shown": 6,
+        "total_variants": 6
+      },
+      {
+        "concept": "us-gaap:NoninterestIncome",
+        "label": "Noninterest Income",
+        "score": 11.27,
+        "variants_shown": 7,
+        "total_variants": 7
+      },
+      {
+        "concept": "jpm:OtherNoninterestExpenseOperatingLosses",
+        "label": "Other Noninterest Expense, Operating Losses",
+        "score": 11.04,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:PensionAndOtherPostretirementBenefitExpense",
+        "label": "Pension and Other Postretirement Benefits Cost (Reversal of Cost)",
+        "score": 10.94,
+        "variants_shown": 1,
+        "total_variants": 1
+      }
+    ]
+  },
+  "answer": {
+    "question": "What was total noninterest expense in fiscal year 2025?",
+    "status": "answered",
+    "text": "$95,640M for 2025-01-01 to 2025-12-31.\nMeasure: Noninterest Expense (us-gaap:NoninterestExpense).\nWhy this variant: Picked the consolidated variant as it represents the total noninterest expense for the entire entity.",
+    "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:NoninterestExpense' AND dimensions_json = '{}' AND period_start = '2025-01-01' AND period_end = '2025-12-31'",
+    "plan": {
+      "intent": "read",
+      "not_available_reason": null,
+      "reasoning": "Selecting total noninterest expense for FY2025 from the consolidated variant, which is the headline measure for total noninterest expense.",
+      "sql": "SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts WHERE concept = 'us-gaap:NoninterestExpense' AND dimensions_json = '{}' AND period_start = '2025-01-01' AND period_end = '2025-12-31'",
+      "target": {
+        "concept": "us-gaap:NoninterestExpense",
+        "dimensions_json": "{}"
+      },
+      "target_period_start": "2025-01-01",
+      "target_period_end": "2025-12-31",
+      "ambiguity": "none",
+      "chosen_dimension_reason": "Picked the consolidated variant as it represents the total noninterest expense for the entire entity.",
+      "alternatives": [],
+      "clarification_question": null
+    },
+    "measure": {
+      "concept": "us-gaap:NoninterestExpense",
+      "dimensions_json": "{}",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "value_numeric": 95640000000.0,
+      "unit": "iso4217:USD",
+      "label": "Noninterest Expense",
+      "dimension_labels": {}
+    },
+    "alternatives": [],
+    "ambiguity": "none",
+    "rows": [
+      [
+        "us-gaap:NoninterestExpense",
+        "{}",
+        "2025-01-01",
+        "2025-12-31",
+        95640000000.0,
+        "iso4217:USD",
+        "JPMC_10-K_FY2025"
+      ]
+    ],
+    "columns": [
+      "concept",
+      "dimensions_json",
+      "period_start",
+      "period_end",
+      "value_numeric",
+      "unit",
+      "source_document"
+    ],
+    "block_reason": null,
+    "reason": null,
+    "system_notes": []
+  },
+  "executed": true,
+  "confidence": {
+    "score": 1.0,
+    "flagged": false,
+    "reasons": [],
+    "components": {
+      "back_translation": 1.0,
+      "magnitude": 1.0,
+      "unit_scale": 1.0
+    },
+    "back_translation": {
+      "original_question": "What was total noninterest expense in fiscal year 2025?",
+      "back_translated_question": "What is the total noninterest expense for the firm-wide consolidated total for the year ended December 31, 2025?",
+      "judgment": {
+        "original_metric": "total noninterest expense",
+        "original_period": "fiscal year 2025",
+        "original_scope": "firm-wide consolidated total",
+        "back_translated_metric": "total noninterest expense",
+        "back_translated_period": "year ended December 31, 2025",
+        "back_translated_scope": "firm-wide consolidated total",
+        "metric": "match",
+        "period": "match",
+        "scope": "match",
+        "explanation": "All aspects match as they refer to the same total noninterest expense for the same fiscal year."
+      },
+      "period_source": "code"
+    },
+    "sanity": {
+      "checks": [
+        {
+          "name": "non_null",
+          "status": "pass",
+          "detail": "1 row(s), value present"
+        },
+        {
+          "name": "magnitude",
+          "status": "pass",
+          "detail": "2 comparable year value(s), median 89,484,500,000"
+        },
+        {
+          "name": "unit_scale",
+          "status": "pass",
+          "detail": "answer figure 95,640,000,000 matches fact (iso4217:USD)"
+        }
+      ]
+    },
+    "notes": []
+  },
+  "error": null,
+  "elapsed_s": 6.94,
+  "db_before": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_after": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_unchanged": true,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 9715,
+    "completion_tokens": 423,
+    "cost_usd": 0.00138
+  }
+}

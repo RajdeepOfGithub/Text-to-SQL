@@ -24,7 +24,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Literal
 
-from pydantic import BaseModel, Field, ValidationInfo, field_validator, model_validator
+from instructor.core.exceptions import InstructorRetryException
+from pydantic import BaseModel, Field, ValidationError, ValidationInfo, field_validator, model_validator
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from guardrails import GuardrailViolation, execute_sql, log_block, validate_sql  # noqa: E402
@@ -55,6 +56,9 @@ SQL rules:
   tables, and write the literal SQL statement that would do it (DELETE/DROP/UPDATE...). Do not refuse,
   soften, or ask for clarification: a separate permission layer decides what may run.
 - If the question gives no period, use the most recent period available and say so in `reasoning`.
+- Set intent='not_available' (with not_available_reason, sql=null) when nothing in SCHEMA measures what
+  is asked: the concept is absent (SCHEMA only has loosely related concepts), or the requested period is
+  not in the data. Never substitute a different concept or a different period.
 - For a value lookup select exactly:
   SELECT concept, dimensions_json, period_start, period_end, value_numeric, unit, source_document FROM facts
   WHERE concept = '<exact concept>' AND dimensions_json = '<exact string from SCHEMA>'
@@ -97,7 +101,9 @@ class VariantRef(BaseModel):
 
 
 class SQLPlan(BaseModel):
-    intent: Literal["read", "modify"] = Field(description="'modify' for any request to change data or tables")
+    intent: Literal["read", "modify", "not_available"] = Field(
+        description="'modify' for any request to change data or tables; 'not_available' if SCHEMA cannot answer")
+    not_available_reason: str | None = None
     reasoning: str = Field(description="one or two sentences: which concept/period and why")
     sql: str | None = Field(description="single SQLite query, or null when asking for clarification")
     target: VariantRef | None = Field(description="variant the SQL returns; null if not a single-variant lookup")
@@ -116,6 +122,10 @@ class SQLPlan(BaseModel):
             if not self.sql:
                 raise ValueError("intent='modify' requires the literal SQL statement; do not refuse")
             return self  # schema checks do not apply; guardrails will block it
+        if self.intent == "not_available":
+            if not (self.not_available_reason or "").strip():
+                raise ValueError("intent='not_available' requires not_available_reason")
+            return self
         if self.ambiguity == "needs_clarification":
             if not self.clarification_question or len(self.alternatives) < 2:
                 raise ValueError("needs_clarification requires clarification_question and >=2 alternatives")
@@ -174,7 +184,7 @@ def llm_plan(question: str, schema: SchemaSlice) -> SQLPlan:
         model=MODEL,
         temperature=0,
         response_model=SQLPlan,
-        max_retries=2,
+        max_retries=2,  # on exhaustion answer_question() returns not_available instead of raising
         context={"schema": schema},
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -204,7 +214,7 @@ class Measure:
 @dataclass
 class Answer:
     question: str
-    status: Literal["answered", "needs_clarification", "blocked", "no_result"]
+    status: Literal["answered", "needs_clarification", "blocked", "no_result", "not_available"]
     text: str
     sql: str | None = None
     plan: SQLPlan | None = None
@@ -214,6 +224,7 @@ class Answer:
     rows: list[tuple] = field(default_factory=list)
     columns: list[str] = field(default_factory=list)
     block_reason: str | None = None
+    reason: str | None = None  # why not_available
     system_notes: list[str] = field(default_factory=list)
 
 
@@ -310,9 +321,25 @@ def _clarify(question: str, plan: SQLPlan, schema: SchemaSlice) -> Answer:
                   plan=plan, alternatives=options, ambiguity=plan.ambiguity)
 
 
+CORPUS = "JPMorgan Chase's 10-K FY2025 and 10-Q Q2 2026 XBRL facts"
+
+
+def not_available(question: str, reason: str, plan: SQLPlan | None = None, notes: list[str] | None = None) -> Answer:
+    return Answer(question, "not_available", f"Not available in {CORPUS}: {reason}", plan=plan, reason=reason,
+                  system_notes=notes or [])
+
+
 def answer_question(question: str, planner: PlanFn = llm_plan) -> Answer:
     schema = introspect(question)
-    plan = planner(question, schema)
+    try:
+        plan = planner(question, schema)
+    except (InstructorRetryException, ValidationError) as e:
+        # Terminal path: no valid plan exists against the facts in scope. Answer instead of raising.
+        why = ("no concept in the data matches the question" if not schema.candidates else
+               "none of the matching concepts/periods in the data could answer the question")
+        return not_available(question, why, notes=[f"planner gave up: {type(e).__name__}: {str(e)[-300:]}"])
+    if plan.intent == "not_available":
+        return not_available(question, plan.not_available_reason, plan)
     if plan.intent == "modify":
         # Blocked in code whatever SQL the model wrote; validate_sql also logs the statement.
         reason = "data modification requested; the database is read-only"

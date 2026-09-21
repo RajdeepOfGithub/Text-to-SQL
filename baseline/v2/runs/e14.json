@@ -1,0 +1,146 @@
+{
+  "id": "e14",
+  "category": "no_answer",
+  "question": "What was JPMorgan's cost of goods sold in fiscal year 2025?",
+  "expected": {
+    "outcome": "not_available"
+  },
+  "schema_slice": {
+    "periods": [
+      {
+        "label": "FY2025",
+        "period_type": "duration",
+        "start": "2025-01-01",
+        "end": "2025-12-31"
+      },
+      {
+        "label": "year-end 2025",
+        "period_type": "instant",
+        "start": null,
+        "end": "2025-12-31"
+      }
+    ],
+    "candidates": [
+      {
+        "concept": "us-gaap:FinancingReceivableExcludingAccruedInterestModifiedPeriod",
+        "label": "Financing Receivable, Excluding Accrued Interest, Modified in Period, Amount",
+        "score": 7.35,
+        "variants_shown": 12,
+        "total_variants": 22
+      },
+      {
+        "concept": "jpm:AccruedInterestAndAccountsReceivable",
+        "label": "Accrued Interest and Accounts Receivable",
+        "score": 6.16,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:SecuritiesSoldUnderAgreementsToRepurchase",
+        "label": "Securities Sold under Agreements to Repurchase",
+        "score": 5.72,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "jpm:IndemnificationAgreementsLoanSaleAndSecuritizationLoansSoldWithRecourseCarryingValue",
+        "label": "Indemnification Agreements, Loan Sale and Securitization, Loans Sold with Recourse: Carrying Value",
+        "score": 5.57,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:FederalFundsSoldAndSecuritiesPurchasedUnderAgreementsToResell",
+        "label": "Federal Funds Sold and Securities Purchased under Agreements to Resell",
+        "score": 5.55,
+        "variants_shown": 6,
+        "total_variants": 6
+      },
+      {
+        "concept": "jpm:IndemnificationAgreementsLoanSaleAndSecuritizationLoansSoldWithRecourseContractualAmount",
+        "label": "Indemnification Agreements Loan Sale And Securitization Loans Sold With Recourse Contractual Amount",
+        "score": 5.53,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:SecuritiesSoldUnderAgreementsToRepurchaseFairValueOfCollateral",
+        "label": "Securities Sold under Agreements to Repurchase, Fair Value of Collateral",
+        "score": 5.46,
+        "variants_shown": 1,
+        "total_variants": 1
+      },
+      {
+        "concept": "us-gaap:SecuritiesSoldUnderAgreementsToRepurchaseGrossIncludingNotSubjectToMasterNettingArrangement",
+        "label": "Securities Sold under Agreements to Repurchase, Gross Including Not Subject to Master Netting Arrangement",
+        "score": 5.46,
+        "variants_shown": 12,
+        "total_variants": 14
+      }
+    ]
+  },
+  "answer": {
+    "question": "What was JPMorgan's cost of goods sold in fiscal year 2025?",
+    "status": "not_available",
+    "text": "Not available in JPMorgan Chase's 10-K FY2025 and 10-Q Q2 2026 XBRL facts: The concept 'cost of goods sold' is absent from the schema.",
+    "sql": null,
+    "plan": {
+      "intent": "not_available",
+      "not_available_reason": "The concept 'cost of goods sold' is absent from the schema.",
+      "reasoning": "The requested concept is not available in the provided schema for FY2025.",
+      "sql": null,
+      "target": null,
+      "target_period_start": null,
+      "target_period_end": null,
+      "ambiguity": "none",
+      "chosen_dimension_reason": null,
+      "alternatives": [],
+      "clarification_question": null
+    },
+    "measure": null,
+    "alternatives": [],
+    "ambiguity": "none",
+    "rows": [],
+    "columns": [],
+    "block_reason": null,
+    "reason": "The concept 'cost of goods sold' is absent from the schema.",
+    "system_notes": []
+  },
+  "executed": false,
+  "confidence": {
+    "score": 1.0,
+    "flagged": false,
+    "reasons": [],
+    "components": {},
+    "back_translation": null,
+    "sanity": null,
+    "notes": [
+      "not scored: status=not_available"
+    ]
+  },
+  "error": null,
+  "elapsed_s": 1.12,
+  "db_before": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_after": {
+    "facts": 15040,
+    "sum_value": 1516336760572861.5,
+    "concepts": 1731,
+    "schema_objects": 6,
+    "size": 26750976,
+    "mtime_ns": 1790016423085737000
+  },
+  "db_unchanged": true,
+  "usage": {
+    "calls": 1,
+    "prompt_tokens": 5759,
+    "completion_tokens": 67,
+    "cost_usd": 0.00048
+  }
+}

@@ -174,3 +174,31 @@ def test_total_net_revenue_q2_2026_end_to_end():
     assert a.measure.value_numeric == 57_347_000_000
     assert a.ambiguity == "none" and a.alternatives == []
     assert "$57,347M" in a.text
+
+
+# ------------------------------------------------------------ not_available terminal path
+
+def test_absent_concept_returns_not_available_without_llm_retry_crash():
+    """Planner that can never produce a valid plan: the pipeline must answer not_available, not raise."""
+    calls = []
+
+    def hopeless_planner(question, schema):
+        calls.append(1)
+        return SQLPlan.model_validate(  # invented concept -> fails schema validation, as the LLM did in v1
+            {"intent": "read", "reasoning": "x", "sql": "SELECT 1", "ambiguity": "none",
+             "target": {"concept": "us-gaap:CostOfGoodsAndServicesSold", "dimensions_json": "{}"},
+             "target_period_start": "2025-01-01", "target_period_end": "2025-12-31"},
+            context={"schema": schema})
+
+    a = answer_question("What was JPMorgan's cost of goods sold in fiscal year 2025?", planner=hopeless_planner)
+    assert a.status == "not_available" and a.reason and a.text.startswith("Not available")
+    assert a.sql is None and a.measure is None and len(calls) == 1
+
+
+@llm
+def test_absent_concept_not_available_end_to_end():
+    for q in ["What was JPMorgan's cost of goods sold in fiscal year 2025?",
+              "What was total net revenue for the third quarter of 2026?"]:
+        a = answer_question(q)
+        assert a.status == "not_available", a.text
+        assert a.measure is None

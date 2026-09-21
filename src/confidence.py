@@ -55,7 +55,7 @@ class ConfidenceReport:
 
 
 def assess(answer: Answer, back_translator: BackTranslator = check) -> ConfidenceReport:
-    if answer.status in ("blocked", "needs_clarification"):
+    if answer.status in ("blocked", "needs_clarification", "not_available"):
         # Nothing was answered, so there's nothing to score. Blocking and asking are the safe outcomes.
         return ConfidenceReport(1.0, False, [], {}, None, None, [f"not scored: status={answer.status}"])
 
