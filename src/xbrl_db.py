@@ -33,6 +33,14 @@ CREATE TABLE facts (
     source_document TEXT NOT NULL
 );
 CREATE INDEX idx_facts_concept ON facts(concept);
+CREATE TABLE concepts (
+    concept     TEXT PRIMARY KEY,           -- fact concepts, axes and members
+    label       TEXT,                       -- standard taxonomy label
+    labels_json TEXT NOT NULL,              -- all label roles, incl. the filer's terse/total labels
+    period_type TEXT,
+    data_type   TEXT,
+    balance     TEXT
+);
 CREATE INDEX idx_facts_period_start ON facts(period_start);
 CREATE INDEX idx_facts_period_end ON facts(period_end);
 """
@@ -62,6 +70,16 @@ def build(results: list[ExtractResult], db_path: Path = DB_PATH) -> None:
                  json.dumps(f.dimensions, sort_keys=True), f.context_id, f.source_document)
                 for r in results for f in r.facts
             ],
+        )
+        merged: dict[str, dict] = {}
+        for r in results:
+            for c in r.concepts.values():
+                m = merged.setdefault(c.concept, {"info": c, "labels": []})
+                m["labels"] += [lb for lb in c.labels if lb not in m["labels"]]
+        conn.executemany(
+            "INSERT INTO concepts VALUES (?,?,?,?,?,?)",
+            [(k, m["info"].label, json.dumps(m["labels"]), m["info"].period_type,
+              m["info"].data_type, m["info"].balance) for k, m in merged.items()],
         )
         conn.commit()
     finally:

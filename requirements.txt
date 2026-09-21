@@ -1,3 +1,8 @@
 arelle-release==2.45.1
 regex==2026.9.10
+openai==3.3.0
+instructor==1.17.0
+pydantic==2.13.5
+sqlparse==0.6.0
+python-dotenv==1.2.3
 pytest==9.1.1

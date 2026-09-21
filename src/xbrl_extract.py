@@ -12,7 +12,7 @@ from collections import Counter
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-from arelle import Cntlr, ModelValue, PluginManager, ValidateDuplicateFacts
+from arelle import Cntlr, ModelValue, PluginManager, ValidateDuplicateFacts, XbrlConst
 from arelle.ModelInstanceObject import ModelInlineFact
 from arelle.ValidateDuplicateFactsConst import DeduplicationType, DuplicateType
 
@@ -46,6 +46,16 @@ class Fact:
 
 
 @dataclass
+class ConceptInfo:
+    concept: str
+    label: str | None  # standard label
+    labels: list[str]  # every label role (terse, total, negated, ...) - the filer's own wording
+    period_type: str | None
+    data_type: str | None
+    balance: str | None
+
+
+@dataclass
 class ExtractResult:
     source_document: str
     facts: list[Fact]
@@ -53,6 +63,7 @@ class ExtractResult:
     unresolved_concepts: list[str]
     inconsistent_duplicates: list[tuple]
     error_codes: dict[str, int]
+    concepts: dict[str, ConceptInfo] = field(default_factory=dict)
 
 
 def _make_controller() -> Cntlr.Cntlr:
@@ -105,6 +116,37 @@ def _dimensions(ctx) -> dict[str, str]:
         else:  # typed dimension: keep the typed member's text content
             dims[str(dim_qname)] = dim_value.typedMember.stringValue.strip()
     return dict(sorted(dims.items()))
+
+
+def _concept_info(model, concept) -> ConceptInfo:
+    rels = model.relationshipSet(XbrlConst.conceptLabel).fromModelObject(concept)
+    labels = []
+    for rel in rels:
+        res = rel.toModelObject
+        if res is not None and (res.xmlLang or "en").startswith("en"):
+            text = " ".join(res.textValue.split())
+            if text and text not in labels:
+                labels.append(text)
+    return ConceptInfo(
+        concept=str(concept.qname),
+        label=concept.label(lang="en", fallbackToQname=False),
+        labels=labels,
+        period_type=concept.periodType,
+        data_type=str(concept.typeQname) if concept.typeQname is not None else None,
+        balance=concept.balance,
+    )
+
+
+def _referenced_concepts(model, facts) -> dict[str, ConceptInfo]:
+    """Labels for every fact concept plus every axis and member used in contexts."""
+    seen = {}
+    for f in facts:
+        seen.setdefault(f.qname, f.concept)
+        for dim_qname, dv in f.context.qnameDims.items():
+            seen.setdefault(dim_qname, dv.dimension)
+            if dv.isExplicit:
+                seen.setdefault(dv.memberQname, dv.member)
+    return {str(q): _concept_info(model, c) for q, c in seen.items() if c is not None}
 
 
 def _to_fact(f: ModelInlineFact, source_document: str) -> Fact:
@@ -163,6 +205,7 @@ def extract_document(path: Path, source_document: str, cntlr: Cntlr.Cntlr | None
             unresolved_concepts=unresolved,
             inconsistent_duplicates=inconsistent,
             error_codes=dict(codes),
+            concepts=_referenced_concepts(model, raw),
         )
     finally:
         cntlr.modelManager.close(model)

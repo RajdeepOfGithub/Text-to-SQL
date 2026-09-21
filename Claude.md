@@ -1,7 +1,7 @@
 
 # Project: Text-to-SQL over SEC XBRL Facts
 
-Second portfolio project, same JPMC corpus as ../financial-rag (10-K FY2025,
+Second portfolio project, same JPMC corpus as ../RAG/financial-rag (10-K FY2025,
 10-Q Q2-2026). Source files: data/raw/jpmc/*.htm (already downloaded, contain
 inline XBRL — do not re-fetch).
 

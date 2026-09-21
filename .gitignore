@@ -5,3 +5,5 @@ vendor/
 data/raw/
 data/*.db
 data/*.db.tmp
+.env
+logs/

@@ -35,3 +35,23 @@ Standard taxonomies (us-gaap, dei, srt) are fetched and cached by Arelle on firs
 Consistent duplicate facts (the same number reported rounded in different tables) are collapsed
 to the most precise one using Arelle's XBRL Duplicates implementation. Instants use
 `period_start = NULL, period_end = <date>`.
+
+## Phase 2: SQL generation + guardrails
+
+```
+.venv/Scripts/python src/sql_generate.py "What was total net revenue for Q2 2026?"
+```
+
+Needs `OPENAI_API_KEY` in `.env` (gitignored).
+
+- `schema_introspect.py`: BM25 over each concept's standard and filer labels, filtered to the
+  question's period. Shows the generator every dimensional variant of the top concepts.
+- `sql_generate.py`: instructor/gpt-4o-mini plan with the target variant, target period and
+  `chosen_dimension_reason`, all validated against the schema slice. After execution, any
+  other variant within 5% of the answer (same period and unit) is added to the answer as an
+  alternative whether or not the model listed it. Segment breakdowns of the answered concept
+  are not treated as alternatives.
+- `guardrails.py`: sqlparse validation (one SELECT, no DDL/DML/admin keywords anywhere,
+  subquery depth <= 2, row cap), then a read-only SQLite sandbox with an authorizer that
+  allows only facts/concepts reads and allowlisted functions. Blocks are logged to
+  `logs/guardrails_blocked.jsonl`.
