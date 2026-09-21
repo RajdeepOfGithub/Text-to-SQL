@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+vendor/
+data/raw/
+data/*.db
+data/*.db.tmp
