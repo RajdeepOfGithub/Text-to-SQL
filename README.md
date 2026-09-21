@@ -55,3 +55,29 @@ Needs `OPENAI_API_KEY` in `.env` (gitignored).
   subquery depth <= 2, row cap), then a read-only SQLite sandbox with an authorizer that
   allows only facts/concepts reads and allowlisted functions. Blocks are logged to
   `logs/guardrails_blocked.jsonl`.
+
+## Phase 3: hallucination detection
+
+```
+.venv/Scripts/python scripts/eval_confidence.py   # 5 known-right vs 5 known-wrong cases
+```
+
+- `back_translate.py`: one LLM call turns the SQL, its labels and result rows into a question,
+  without seeing the original. A second call judges metric and scope against the original.
+  Period is compared in code (parsed question period vs result-row periods); the LLM period
+  verdict is used only as a fallback.
+- **Why an LLM judge, not embeddings:** with text-embedding-3-small/-large, wrong-period paraphrases
+  of "total net revenue for Q2 2026" scored 0.86-0.89, above correct paraphrases (0.65-0.73),
+  so no threshold works. The judge costs ~1-2k gpt-4o-mini tokens per check.
+- `sanity_check.py`: non-null; magnitude vs the concept's own history (leave-one-out, same
+  dimensions/unit/period length, within 10x, sign-consistent); answer-text figure vs fact
+  value and unit.
+- `confidence.py`: 0.6 back-translation + 0.2 magnitude + 0.2 unit/scale, with a non-null gate.
+  Weights are untuned. Ambiguity/disclosure is deliberately not an input.
+
+**Eval result (constructed set, n=10):** flag decisions 10/10 correct on two runs. Right answers
+all scored 1.00; wrong ones 0.40-0.80. The scale-error case (0.80) is caught by its hard-fail
+rule, not by the score threshold. Ten hand-built cases is not evidence that the score is
+calibrated. The magnitude check passed every wrong case: they are real facts for the wrong
+question, so it only catches value corruption. The judge sometimes names extra mismatched aspects
+(e.g. scope as well as period) even when its overall verdict is right.

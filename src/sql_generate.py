@@ -210,6 +210,7 @@ class Answer:
     alternatives: list[Measure] = field(default_factory=list)
     ambiguity: str = "none"
     rows: list[tuple] = field(default_factory=list)
+    columns: list[str] = field(default_factory=list)
     block_reason: str | None = None
     system_notes: list[str] = field(default_factory=list)
 
@@ -332,10 +333,11 @@ def answer_question(question: str, planner: PlanFn = llm_plan) -> Answer:
     measure = _measure_from_rows(result.columns, result.rows, plan, schema)
     if measure is None:
         if not result.rows:
-            return Answer(question, "no_result", "The query returned no rows.", sql=plan.sql, plan=plan)
+            return Answer(question, "no_result", "The query returned no rows.", sql=plan.sql, plan=plan,
+                          columns=result.columns)
         preview = "\n".join(str(r) for r in result.rows[:10])
         return Answer(question, "answered", f"{len(result.rows)} rows:\n{preview}", sql=plan.sql, plan=plan,
-                      rows=result.rows, ambiguity=plan.ambiguity)
+                      rows=result.rows, columns=result.columns, ambiguity=plan.ambiguity)
 
     ambiguity = plan.ambiguity
     notes = []
@@ -370,7 +372,7 @@ def answer_question(question: str, planner: PlanFn = llm_plan) -> Answer:
         lines.append("Other measures in the filing that could also answer this question:")
         lines += [f"  - {m.describe()}: {format_value(m.value_numeric, m.unit)}" for m in alternatives]
     return Answer(question, "answered", "\n".join(lines), sql=plan.sql, plan=plan, measure=measure,
-                  alternatives=alternatives, ambiguity=ambiguity, rows=result.rows, system_notes=notes)
+                  alternatives=alternatives, ambiguity=ambiguity, rows=result.rows, columns=result.columns, system_notes=notes)
 
 
 if __name__ == "__main__":
